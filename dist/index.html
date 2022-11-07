@@ -5,9 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./main.js"></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Books</title>
 </head>
 <body>
+    <main>
+        <div class="container">
+            <div class="form-body">
+                <h1>Könyv</h1>
+                <div class="form error" id="form-error">
+                    
+                </div>
+                <div class="input-area">
+                    <label for="paper">Papír</label>
+                    <input type="radio" name="type" id="paper" value="Papír">
+                    <label for="ebook">Ebook</label>
+                    <input type="radio" name="type" id="ebook" value="Ebook">
+                </div>
+                <div class="input-area">
+                    <input type="text" name="book-name" id="book-name" class="book-name input-field" placeholder=" ">
+                    <label for="book-name" class="input-label">Könyv címe</label>
+                </div>
+                <div class="input-area">
+                    <input type="number" min="0" name="book-price" id="book-price" class="book-price input-field" placeholder=" ">
+                    <label for="book-price" class="input-label">Könyv ára</label>
+                </div>
+                <div class="input-area">
+                    <input type="number" min="1" name="book-weight" id="book-weight" class="book-weight input-field" placeholder=" ">
+                    <label for="book-weight" class="input-label">Könyv súlya</label>
+                </div>
+                <div class="input-area">
+                    <input type="text" min="1" name="book-isbn" id="book-isbn" class="book-isbn input-field" placeholder=" ">
+                    <label for="book-isbn" class="input-label">ISBN</label>
+                </div>
+                <div class="center">
+                    <button class="submit-btn" id="add-book" type="submit">Küldés</button>
+                </div>
+                
+            </div>
+        
+        </div>
+        
+    </main>
     
 </body>
 </html>

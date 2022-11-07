@@ -1,0 +1,147 @@
+:root {
+    --green-payment: #3ecc6d;
+    --gray-bg: #d4d4d4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: 'Montserrat', sans-serif
+}
+
+body {
+    background-color: var(--gray-bg);
+    
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form {
+    margin-bottom: 20px;
+}
+
+.form.address {
+    margin-top: 40px;
+
+}
+
+.form.error {
+    margin-top: 20px;
+    color: white;
+    padding: 5px;
+    background-color: red;
+    border-radius: 10px;
+}
+
+
+.form-body {
+    background-color: white;
+    padding: 30px 20px 30px 20px;
+    border-radius: 50px;
+}
+
+.input-area {
+    position: relative;
+    margin: 2em;
+}
+
+.input-field {
+    border: none;
+    font-weight: 500;
+    font-size: 16px;
+    border-bottom: solid black 1px;
+    background: none
+}
+
+.input-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: rgb(44, 44, 44);
+    font-size: 13px;
+    pointer-events: none;
+    transform: translateY(0);
+    transform: translateX(-1px);
+    transition: all 0.2s ease-in-out;
+}
+
+.input-field:valid,
+.input-field:focus {
+    outline: none;
+
+}
+
+.input-field:focus + .input-label{
+    outline: none;
+    transform: translateY(-20px);
+}
+
+.input-field:not(:placeholder-shown) + .input-label {
+    transform: translateY(-20px);
+}
+
+
+.input-field.card {
+    width: 100%;
+}
+
+.payment {
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn {
+    background-color: #3ecc6d;
+    border: solid 1px #3ecc6d;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 30%;
+    padding: 10px;
+    
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.pay-btn:active {
+    background-color: hsla(140, 58%, 52%, 0.837);
+}
+
+
+.grid { display: grid; }
+.grid.col-2 {grid-template-columns: 1fr 1fr;}
+.grid.col-3 {grid-template-columns: 1fr 1fr 1fr;}
+.grid.col-4 {grid-template-columns: 1fr 1fr 1fr 1fr;}
+.grid.col-4 {grid-template-columns: 1fr 1fr 1fr 1fr;}
+
+.grid.col-2-1 {grid-template-columns: 1fr 0.3fr;}
+
+
+@media screen and (max-width: 500px) {
+    .grid {
+        display: block;
+    }
+
+    .form {
+        margin-bottom: 40px;
+    }
+
+    .input-area {
+        margin-bottom: 30px;
+    }
+    
+    .form.address {
+        margin-top: 40px;
+    }
+}
