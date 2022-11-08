@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const PaperBook_js_1 = require("../src/PaperBook.js");
-let books;
+const PaperBook_1 = require("../src/PaperBook");
+const Ebook_1 = require("../src/Ebook");
+let books = [];
 let errors = [
     {
         id: 0,
@@ -26,13 +27,17 @@ let errors = [
 ];
 let activeErrors;
 let formError;
+let isPaperBook = true;
 document.addEventListener('DOMContentLoaded', () => {
     let name;
     let price;
     let weight;
     let isbn;
     formError = document.getElementById('form-error');
+    document.getElementById('input-area-weight').style.display = 'block';
+    document.getElementById('input-area-size').style.display = 'none';
     setError(-1);
+    showDatas();
     //#region name check
     document.getElementById('book-name').addEventListener('change', e => {
         let bookName = e.currentTarget.value;
@@ -57,10 +62,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     //#endregion
+    //#region Size check
+    document.getElementById('book-size').addEventListener('change', e => {
+        let bookSize = e.currentTarget.value;
+        if (checkWeightOrSize(bookSize)) {
+            setError(1);
+        }
+        else {
+            removeError(1);
+            price = parseInt(bookSize);
+        }
+    });
+    //#endregion
     //#region Weight check
     document.getElementById('book-weight').addEventListener('change', e => {
         let bookWeight = e.currentTarget.value;
-        if (checkWeight(bookWeight)) {
+        if (checkWeightOrSize(bookWeight)) {
             setError(2);
         }
         else {
@@ -81,13 +98,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     //#endregion
+    document.getElementById('paper').addEventListener('change', e => {
+        let value = e.currentTarget;
+        if (value.checked) {
+            isPaperBook = true;
+            document.getElementById('input-area-weight').style.display = 'block';
+            document.getElementById('input-area-size').style.display = 'none';
+        }
+    });
+    document.getElementById('ebook').addEventListener('change', e => {
+        let value = e.currentTarget;
+        if (value.checked) {
+            isPaperBook = false;
+            document.getElementById('input-area-weight').style.display = 'none';
+            document.getElementById('input-area-size').style.display = 'block';
+        }
+        console.log(isPaperBook);
+    });
     document.getElementById('add-book').addEventListener('click', () => {
         name = document.getElementById('book-name').value;
         price = parseInt(document.getElementById('book-price').value);
         weight = parseInt(document.getElementById('book-weight').value);
         isbn = document.getElementById('book-isbn').value;
-        if (!checkBookName(name) && !checkPrice(price.toString()) && !checkWeight(weight.toString()) && !checkIsbn(isbn)) {
-            books.push(new PaperBook_js_1.PaperBook(name, price, isbn, weight));
+        if (isPaperBook) {
+            if (!checkBookName(name) && !checkPrice(price.toString()) && !checkWeightOrSize(weight.toString()) && !checkIsbn(isbn)) {
+                books.push(new PaperBook_1.PaperBook(name, price, isbn, weight));
+                showDatas();
+            }
+        }
+        else {
+            if (!checkBookName(name) && !checkPrice(price.toString()) && !checkWeightOrSize(weight.toString()) && !checkIsbn(isbn)) {
+                books.push(new Ebook_1.Ebook(name, price, isbn, weight));
+                showDatas();
+            }
         }
     });
 });
@@ -97,7 +140,7 @@ const checkBookName = (bookName) => {
 const checkPrice = (bookPrice) => {
     return parseInt(bookPrice) < 0;
 };
-const checkWeight = (bookWeight) => {
+const checkWeightOrSize = (bookWeight) => {
     return parseInt(bookWeight) <= 0;
 };
 const checkIsbn = (bookIsbn) => {
@@ -135,4 +178,15 @@ const removeError = (errorId) => {
         console.log(activeErrors);
         setNextError();
     }
+};
+const showDatas = () => {
+    let out = document.getElementById('out');
+    out.innerHTML = '';
+    let bookCount = books.length + 'db könyv';
+    let freeBookCount = books.filter(e => e.price == 0).length + 'db ingyenes könyv';
+    let sumPrice = 0;
+    books.forEach(e => sumPrice += e.price);
+    let p = document.createElement('p');
+    p.innerHTML = bookCount + '<br>' + freeBookCount + '<br>' + sumPrice + '$';
+    out.append(p);
 };

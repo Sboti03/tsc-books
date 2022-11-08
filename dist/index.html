@@ -9,6 +9,10 @@
     <title>Books</title>
 </head>
 <body>
+    <nav>
+        <div id="out">
+        </div>
+    </nav>
     <main>
         <div class="container">
             <div class="form-body">
@@ -30,10 +34,17 @@
                     <input type="number" min="0" name="book-price" id="book-price" class="book-price input-field" placeholder=" ">
                     <label for="book-price" class="input-label">Könyv ára</label>
                 </div>
-                <div class="input-area">
+
+                <div class="input-area" id="input-area-weight">
                     <input type="number" min="1" name="book-weight" id="book-weight" class="book-weight input-field" placeholder=" ">
-                    <label for="book-weight" class="input-label">Könyv súlya</label>
+                    <label for="book-weight" class="input-label">Könyv súlya (gramm)</label>
                 </div>
+
+                <div class="input-area" id="input-area-size">
+                    <input type="number" min="1" name="book-size" id="book-size" class="book-size input-field" placeholder=" ">
+                    <label for="book-size" class="input-label">Könyv mérete (kb)</label>
+                </div>
+
                 <div class="input-area">
                     <input type="text" min="1" name="book-isbn" id="book-isbn" class="book-isbn input-field" placeholder=" ">
                     <label for="book-isbn" class="input-label">ISBN</label>
